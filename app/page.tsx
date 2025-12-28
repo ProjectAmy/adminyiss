@@ -1,15 +1,15 @@
 import Image from "next/image";
 import { LoginGoogleButton } from "@/components/login-button";
 
-// import { auth } from "@/auth";
-// import { redirect } from "next/navigation";
+import { auth } from "@/auth";
+import { redirect } from "next/navigation";
 
 export default async function Home() {
-  // const session = await auth();
+  const session = await auth();
 
-  // if (session) {
-  //   redirect("/dashboard");
-  // }
+  if (session) {
+    redirect("/dashboard");
+  }
 
   return (
     <div className="flex-grow flex items-center justify-center min-h-screen bg-gray-50">
