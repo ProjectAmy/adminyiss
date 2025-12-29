@@ -38,12 +38,20 @@ export default async function DashboardPage() {
     const stats = token ? await getStats(token) : null;
 
     return (
-        <div className="min-h-screen bg-gray-50/50 p-8">
-            <div className="max-w-2xl mx-auto">
-                <header className="mb-8">
-                    <h1 className="text-3xl font-bold text-gray-900 tracking-tight">Dashboard Admin</h1>
-                    <p className="mt-2 text-gray-600">Selamat datang di dashboard admin.</p>
-                </header>
+        <div className="max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-10">
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+                {/* Welcome Card */}
+                <div className="md:col-span-3 bg-white dark:bg-zinc-900 rounded-2xl shadow-sm border border-gray-100 dark:border-zinc-800 p-8 relative overflow-hidden group">
+                    <div className="absolute top-0 right-0 p-4 opacity-10 group-hover:opacity-20 transition-opacity">
+                        <div className="w-32 h-32 bg-blue-500 rounded-full blur-3xl"></div>
+                    </div>
+                    <h1 className="text-3xl text-gray-900 dark:text-white mb-2">
+                        Ahlan Wa Sahlan, {session?.user?.name}!
+                    </h1>
+                    <p className="text-gray-500 dark:text-gray-400">
+                        Berikut adalah ringkasan anggota yiss
+                    </p>
+                </div>
 
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-lg">
                     {/* Total Murid Card */}
