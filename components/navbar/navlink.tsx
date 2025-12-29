@@ -20,11 +20,11 @@ const Navlink = () => {
             </button>
             <div className={clsx("w-full md:block md:w-auto", { "hidden": !open })}>
                 <ul className="flex flex-col text-sm upparcase p-4 mt-4 rounded-sm bg-gray-50 dark:bg-zinc-900 md:flex-row md:items-center md:space-x-10 md:p-0 md:mt-0 md:border-0 md:bg-white dark:md:bg-transparent">
-                    {/* <li>
+                    <li>
                         <Link href="/dashboard" className="block py-2 px-3 text-gray-800 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-zinc-800 rounded-sm md:hover:bg-transparent dark:md:hover:bg-transparent md:p-0 md:dark:hover:text-white transition-colors">
                             Dashboard
                         </Link>
-                    </li> */}
+                    </li>
                     <li>
                         <Link href="/list" className="block py-2 px-3 text-gray-800 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-zinc-800 rounded-sm md:hover:bg-transparent dark:md:hover:bg-transparent md:p-0 md:dark:hover:text-white transition-colors">
                             List
@@ -33,6 +33,11 @@ const Navlink = () => {
                     <li>
                         <Link href="/add" className="block py-2 px-3 text-gray-800 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-zinc-800 rounded-sm md:hover:bg-transparent dark:md:hover:bg-transparent md:p-0 md:dark:hover:text-white transition-colors">
                             Add
+                        </Link>
+                    </li>
+                    <li>
+                        <Link href="/about" className="block py-2 px-3 text-gray-800 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-zinc-800 rounded-sm md:hover:bg-transparent dark:md:hover:bg-transparent md:p-0 md:dark:hover:text-white transition-colors">
+                            About
                         </Link>
                     </li>
                 </ul>
