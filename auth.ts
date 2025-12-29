@@ -1,6 +1,91 @@
 import NextAuth from "next-auth"
 import Google from "next-auth/providers/google"
 
+const API_BASE_URL = process.env.NEXT_PUBLIC_API_URL || "http://localhost:8000/api";
+
 export const { handlers, auth, signIn, signOut } = NextAuth({
     providers: [Google],
+    pages: {
+        error: "/",
+    },
+    callbacks: {
+        async signIn({ account }) {
+            if (account?.id_token) {
+                try {
+                    const res = await fetch(`${API_BASE_URL}/admin/auth/check`, {
+                        method: "POST",
+                        headers: {
+                            "Content-Type": "application/json",
+                            "Accept": "application/json",
+                        },
+                        body: JSON.stringify({
+                            google_token: account.id_token,
+                        }),
+                    });
+
+                    if (res.ok) {
+                        return true;
+                    } else {
+                        console.error("Login rejected: Not an admin or invalid token");
+                        return false;
+                    }
+                } catch (error) {
+                    console.error("Login error:", error);
+                    return false;
+                }
+            }
+            return false;
+        },
+        async jwt({ token, account }) {
+            // 1. Capture Google ID Token if present (on initial sign in)
+            if (account?.id_token) {
+                token.id_token = account.id_token
+            }
+
+            // 2. If we have an ID token but no API token, valid it/get it from backend
+            // We fetch again here because we can't easily pass data from signIn to jwt
+            if (token.id_token && !token.api_token) {
+                try {
+                    const res = await fetch(`${API_BASE_URL}/admin/auth/check`, {
+                        method: "POST",
+                        headers: {
+                            "Content-Type": "application/json",
+                            "Accept": "application/json",
+                        },
+                        body: JSON.stringify({
+                            google_token: token.id_token,
+                        }),
+                    });
+
+                    if (res.ok) {
+                        const data = await res.json()
+                        token.api_token = data.token
+                        token.user_role = data.roles
+                        // Store user info if needed
+                        if (data.user) {
+                            token.user_id = data.user.id;
+                        }
+                    }
+                } catch (error) {
+                    console.error("Error fetching backend token in JWT callback:", error)
+                }
+            }
+            return token
+        },
+        async session({ session, token }) {
+            if (token?.id_token) {
+                // @ts-ignore
+                session.user.id_token = token.id_token
+            }
+            if (token?.api_token) {
+                // @ts-ignore
+                session.api_token = token.api_token
+            }
+            if (token?.user_role) {
+                // @ts-ignore
+                session.user.roles = token.user_role
+            }
+            return session
+        },
+    },
 })
