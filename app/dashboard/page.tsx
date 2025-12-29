@@ -1,7 +1,7 @@
 import { auth } from "@/auth";
 import { FaUserGraduate, FaUserTie } from "react-icons/fa";
 
-const API_BASE_URL = process.env.NEXT_PUBLIC_API_URL || "http://localhost:8000/api";
+import { API_BASE_URL } from "@/lib/constants";
 
 type Stats = {
     total_students: number;
@@ -10,7 +10,7 @@ type Stats = {
 
 async function getStats(token: string): Promise<Stats | null> {
     try {
-        const res = await fetch(`${API_BASE_URL}/admin/stats`, {
+        const res = await fetch(`${API_BASE_URL}/stats`, {
             headers: {
                 Authorization: `Bearer ${token}`,
                 Accept: "application/json",
