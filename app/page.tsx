@@ -36,7 +36,7 @@ export default async function Home({
             priority
           />
         </div>
-        <h1 className="text-4xl font-medium mb-1 text-center">Admin Yiss</h1>
+        <h1 className="text-4xl font-medium mb-1 text-center">Admin Yiss trigger</h1>
         <p className="font-medium mb-5 text-gray-500 text-center">
           Silahkan login ke akun anda
         </p>
