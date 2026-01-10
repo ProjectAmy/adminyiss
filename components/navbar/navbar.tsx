@@ -1,6 +1,7 @@
 import { signOut } from "@/auth";
 import Navlink from "./navlink";
 import { Session } from "next-auth";
+import { cookies } from "next/headers";
 
 const Navbar = ({ session }: { session: Session }) => {
     return (
@@ -29,6 +30,9 @@ const Navbar = ({ session }: { session: Session }) => {
                 <form
                     action={async () => {
                         "use server";
+                        const cookieStore = await cookies();
+                        cookieStore.delete("authjs.session-token");
+                        cookieStore.delete("__Secure-authjs.session-token");
                         await signOut({ redirectTo: "/" });
                     }}
                 >
