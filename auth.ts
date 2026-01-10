@@ -11,7 +11,7 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
         async signIn({ account }) {
             if (account?.id_token) {
                 try {
-                    const res = await fetch(`${API_BASE_URL}/admin/auth/check`, {
+                    const res = await fetch(`${API_BASE_URL}/auth/check`, {
                         method: "POST",
                         headers: {
                             "Content-Type": "application/json",
@@ -45,7 +45,7 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
             // We fetch again here because we can't easily pass data from signIn to jwt
             if (token.id_token && !token.api_token) {
                 try {
-                    const res = await fetch(`${API_BASE_URL}/admin/auth/check`, {
+                    const res = await fetch(`${API_BASE_URL}/auth/check`, {
                         method: "POST",
                         headers: {
                             "Content-Type": "application/json",
