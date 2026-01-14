@@ -25,11 +25,11 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
                     if (res.ok) {
                         return true;
                     } else {
-                        console.error("Login rejected: Not an admin or invalid token");
+                        // console.error("Login rejected: Not an admin or invalid token");
                         return false;
                     }
                 } catch (error) {
-                    console.error("Login error:", error);
+                    // console.error("Login error:", error);
                     return false;
                 }
             }
@@ -66,7 +66,7 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
                         }
                     }
                 } catch (error) {
-                    console.error("Error fetching backend token in JWT callback:", error)
+                    // console.error("Error fetching backend token in JWT callback:", error)
                 }
             }
             return token
