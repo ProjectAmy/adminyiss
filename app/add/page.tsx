@@ -291,7 +291,7 @@ export default function AddStudentPage() {
                             {/* Unit */}
                             <div className="space-y-2">
                                 <label htmlFor="unit" className="block text-sm font-medium text-gray-700">
-                                    Unit
+                                    Jenjang
                                 </label>
                                 <select
                                     id="unit"
@@ -301,7 +301,7 @@ export default function AddStudentPage() {
                                     required
                                     className="w-full px-4 py-3 rounded-xl border border-gray-200 focus:border-blue-500 focus:ring-4 focus:ring-blue-500/10 transition-all duration-200 outline-none hover:border-blue-200 bg-white"
                                 >
-                                    <option value="">Pilih Unit</option>
+                                    <option value="">Pilih Jenjang</option>
                                     <option value="TK">TK</option>
                                     <option value="SD">SD</option>
                                     <option value="SMP">SMP</option>
